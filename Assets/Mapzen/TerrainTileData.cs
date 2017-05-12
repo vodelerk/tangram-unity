@@ -25,6 +25,7 @@ namespace Mapzen
             var colors = new List<Color>();
             var uvs = new List<Vector2>();
             var normals = new List<Vector3>();
+            var tangents = new List<Vector4>();
 
             int index = 0;
             for (int col = 0; col <= resolution; col++)
@@ -37,6 +38,7 @@ namespace Mapzen
                     colors.Add(Color.white);
                     uvs.Add(new Vector2(x, y));
                     normals.Add(Vector3.up);
+                    tangents.Add(new Vector4(1, 0, 0, -1));
 
                     if (row < resolution && col < resolution)
                     {
@@ -58,6 +60,7 @@ namespace Mapzen
             mesh.SetTriangles(indices, 0);
             mesh.SetColors(colors);
             mesh.SetNormals(normals);
+            mesh.SetTangents(tangents);
             mesh.SetUVs(0, uvs);
         }
 
@@ -90,6 +93,11 @@ namespace Mapzen
         {
             material.EnableKeyword("_NORMALMAP");
             material.SetTexture("_BumpMap", NormalTexture);
+        }
+
+        public void RemoveNormalTexture(Material material)
+        {
+            material.DisableKeyword("_NORMALMAP");
         }
 
         public static float ColorToElevation(Color color)
