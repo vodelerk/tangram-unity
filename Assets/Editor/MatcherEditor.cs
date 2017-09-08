@@ -102,7 +102,8 @@ public class MatcherEditor : EditorBase
                     break;
 
                 case FeatureStyle.Matcher.Type.PropertyRegex:
-                    // TODO
+                    matcher.HasProperty = EditorGUILayout.TextField("Property:", matcher.HasProperty);
+                    matcher.RegexPattern = EditorGUILayout.TextField("Regex:", matcher.RegexPattern);
                     break;
             }
         }
